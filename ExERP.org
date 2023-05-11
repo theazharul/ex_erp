@@ -1,0 +1,219 @@
+#+title: ExErp
+* Modules
+** Finance Module
+
+    Accounts Payable
+    Accounts Receivable
+    General Ledger
+    Fixed Assets
+    Tax Management
+    Budgeting
+
+** Human Resources (HR) Module
+
+    Payroll
+    Benefits
+    Time and Attendance
+    Performance Management
+    Training and Development
+    Recruitment and Hiring
+    Employee Self-Service
+
+** Supply Chain Management (SCM) Module
+
+    Inventory Management
+    Procurement
+    Order Management
+    Warehouse Management
+    Shipping and Receiving
+    Demand Planning
+
+** Customer Relationship Management (CRM) Module
+
+    Sales Management
+    Marketing Automation
+    Customer Service
+    Contact Management
+    E-Commerce
+
+** Production and Manufacturing Module
+
+    Bill of Materials (BOM)
+    Material Requirements Planning (MRP)
+    Capacity Planning
+    Shop Floor Control
+    Quality Control
+
+** Project Management Module
+
+    Project Planning and Scheduling
+    Resource Allocation
+    Budgeting and Cost Control
+    Risk Management
+    Collaboration and Communication
+
+** Business Intelligence (BI) Module
+    Analytics and Reporting
+    Dashboards and Scorecards
+    Data Warehousing
+    Key Performance Indicators (KPIs)
+    Data Mining and Visualization
+** Have to Revise
+*** Sales and Order Management Module:
+
+    Customer Table:
+        customer_id: unique identifier for each customer
+        name: name of the customer
+        address: address of the customer
+        contact_person: name of the contact person
+        email: email address of the contact person
+        phone: phone number of the contact person
+
+    Sales Order Table:
+        order_id: unique identifier for each sales order
+        customer_id: foreign key linking to the customer table
+        order_date: date when the order was placed
+        product_id: foreign key linking to the product table
+        quantity: quantity of the product ordered
+        status: current status of the order (e.g. pending, shipped, delivered)
+
+    Shipping Table:
+        shipment_id: unique identifier for each shipment
+        order_id: foreign key linking to the sales order table
+        shipping_date: date when the order was shipped
+        tracking_number: tracking number for the shipment
+
+*** Materials Management Module:
+
+    Raw Material Table:
+        material_id: unique identifier for each raw material
+        name: name of the raw material
+        unit_cost: cost per unit of the raw material
+        supplier_id: foreign key linking to the supplier table
+
+    Inventory Table:
+        inventory_id: unique identifier for each inventory item
+        name: name of the inventory item
+        quantity: current quantity of the inventory item
+        unit_cost: cost per unit of the inventory item
+
+    Purchase Order Table:
+        purchase_id: unique identifier for each purchase order
+        supplier_id: foreign key linking to the supplier table
+        material_id: foreign key linking to the raw material table
+        quantity: quantity of the raw material ordered
+        order_date: date when the purchase order was placed
+        status: current status of the purchase order (e.g. pending, shipped, received)
+
+*** Production Management Module:
+
+    Bill of Materials (BOM) Table:
+        product_id: unique identifier for each product
+        name: name of the product
+        description: description of the product
+        quantity: quantity of the product being manufactured
+        raw_material_id: foreign key linking to the raw material table
+        component_id: foreign key linking to the component table
+
+    Work Order Table:
+        work_order_id: unique identifier for each work order
+        product_id: foreign key linking to the product table
+        quantity: quantity of the product to be manufactured
+        start_date: date when the work order is scheduled to start
+        end_date: date when the work order is scheduled to end
+        status: current status of the work order (e.g. pending, in progress, completed)
+
+    Production Schedule Table:
+        schedule_id: unique identifier for each production schedule
+        work_order_id: foreign key linking to the work order table
+        machine_id: foreign key linking to the machine table
+        start_time: time when production is scheduled to start
+        end_time: time when production is scheduled to end
+*** Quality Control Module:
+
+    Inspection Table:
+        inspection_id: unique identifier for each inspection
+        order_id: foreign key linking to the order table
+        product_id: foreign key linking to the product table
+        inspection_date: date when the inspection was performed
+        inspector_id: foreign key linking to the user table who performed the inspection
+        result: result of the inspection (e.g. pass, fail, need rework)
+        comment: any additional comments about the inspection result
+
+    Rework Table:
+        rework_id: unique identifier for each rework
+        order_id: foreign key linking to the order table
+        product_id: foreign key linking to the product table
+        rework_date: date when the rework was performed
+        reworker_id: foreign key linking to the user table who performed the rework
+        reason: reason for the rework
+        comment: any additional comments about the rework
+
+    Defects Table:
+        defect_id: unique identifier for each defect
+        product_id: foreign key linking to the product table
+        defect_type: type of defect (e.g. scratches, dents, missing parts)
+        description: description of the defect
+        location: location of the defect on the product
+        image: image of the defect
+*** Maintenance Management Module:
+
+    Machine Table:
+        machine_id: unique identifier for each machine
+        name: name of the machine
+        description: description of the machine
+        maintenance_interval: time period between maintenance tasks
+        last_maintenance_date: date of the last maintenance task
+
+    Maintenance Schedule Table:
+        schedule_id: unique identifier for each maintenance schedule
+        machine_id: foreign key linking to the machine table
+        maintenance_type: type of maintenance task to be performed (e.g. cleaning, repair, replacement)
+        scheduled_date: date when the maintenance task is scheduled
+        status: current status of the maintenance task (e.g. pending, in progress, completed)
+
+*** Reporting and Analytics Module:
+
+    Sales Analysis Table:
+        analysis_id: unique identifier for each sales analysis
+        product_id: foreign key linking to the product table
+        month: month for which the analysis is performed
+        year: year for which the analysis is performed
+        total_sales: total sales revenue for the product during the given month and year
+
+    Production Analysis Table:
+        analysis_id: unique identifier for each production analysis
+        product_id: foreign key linking to the product table
+        month: month for which the analysis is performed
+        year: year for which the analysis is performed
+        total_production: total quantity of the product produced during the given month and year
+
+    Inventory Analysis Table:
+        analysis_id: unique identifier for each inventory analysis
+        inventory_id: foreign key linking to the inventory table
+        month: month for which the analysis is performed
+        year: year for which the analysis is performed
+        total_inventory: total quantity of the inventory item in stock during the given month and year
+
+*** User Management Module:
+
+    User Table:
+        user_id: unique identifier for each user
+        name: name of the user
+        email: email address of the user
+        password: hashed password of the user
+        role: role of the user in the system (e.g. administrator, manager, operator)
+
+    Role Table:
+        role_id: unique identifier for each role
+        name: name of the role
+        description: description of the role
+
+    User Role Table:
+        user_id: foreign key linking to the user table
+        role_id: foreign key linking to the role table
+
+* Schema
+**
+
+* PM
