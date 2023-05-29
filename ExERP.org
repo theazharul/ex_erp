@@ -44,6 +44,8 @@
     Shop Floor Control
     Quality Control
 
+***
+
 ** Project Management Module
 
     Project Planning and Scheduling
@@ -214,6 +216,17 @@
         role_id: foreign key linking to the role table
 
 * Schema
-**
+** products
+*** id
+*** name
+*** description
+*** product_category_id
+*** sku
+*** upc (12 digit, 6 for manufacturer, 5 for item, 1 for barcode verification)
+*** manufacturing_cost
+*** selling_price
+** product_categories
+*** id
+*** name
 
 * PM
