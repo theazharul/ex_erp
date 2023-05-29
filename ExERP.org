@@ -230,5 +230,9 @@
 ** product_categories
 *** id
 *** name
+** bom
+*** id
+*** product_id
+*** component_id (referencing product table)
 
 * PM
