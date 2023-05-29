@@ -44,7 +44,6 @@
     Shop Floor Control
     Quality Control
 
-***
 
 ** Project Management Module
 
@@ -108,6 +107,41 @@
         status: current status of the purchase order (e.g. pending, shipped, received)
 
 *** Production Management Module:
+    Product: This entity represents the base product and contains attributes that are common to all product variations. It includes attributes such as product ID, name, description, price, and any other general product information.
+
+    Product Variation: This entity represents the specific variations of a product. It includes attributes like variation ID, product ID (to link it to the base product), variation name, SKU (stock keeping unit) or unique identifier for the variation, and any other relevant attributes specific to the variation (e.g., color, size, style).
+
+    Product Attributes: This entity captures the additional attributes or properties that are specific to each product variation. It includes attributes such as attribute ID, variation ID, attribute name, attribute value, and any other information necessary to describe the variation (e.g., weight, dimensions, material).
+
+    Inventory: The inventory entity tracks the stock levels of each product variation. It includes attributes like inventory item ID, variation ID, quantity on hand, location, and any other relevant inventory-related information.
+
+    Pricing: If different product variations have different prices, you can create a pricing entity that associates a specific price with each variation. It includes attributes such as pricing ID, variation ID, price, effective date, and any other pricing-related information.
+
+    Images: This entity stores the images or visual representations of each product variation. It can include attributes such as image ID, variation ID, image URL or file path, and any other image-related information.
+
+    Product Categories: If your products are organized into categories, you can include a category entity to classify the variations. It includes attributes like category ID, category name, description, and any other category-related information.
+
+    Product: This entity represents the manufactured product and contains attributes such as product ID, name, description, and specifications.
+
+    Bill of Materials (BOM): The BOM represents the list of components and materials required to manufacture a product. It includes the product ID, component ID, quantity, and any additional information like cost or lead time.
+
+    Work Order: A work order represents a specific production order for a product. It includes attributes such as work order ID, product ID, quantity to produce, start date, and completion date.
+
+    Work Order Operations: This entity captures the individual operations or tasks required to complete a work order. It includes attributes such as operation ID, work order ID, operation description, work center or machine assigned, start time, end time, and status.
+
+    Work Centers: Work centers represent specific locations or machines where manufacturing operations take place. Each work center has attributes like work center ID, name, description, capacity, and availability schedule.
+
+    Employees: This entity represents the employees involved in the manufacturing process. It includes attributes like employee ID, name, role, skills, and availability.
+
+    Quality Control: Quality control information can be captured in an entity that includes attributes such as inspection ID, work order ID, inspection date, inspector, quality metrics, and any non-conformance details.
+
+    Inventory: The inventory entity tracks the stock levels of raw materials, components, and finished goods. It includes attributes like inventory item ID, item name, quantity on hand, reorder point, and supplier information.
+
+    Suppliers: The suppliers entity represents the external entities or vendors that provide raw materials and components to the manufacturing process. It includes attributes like supplier ID, name, contact information, and lead time.
+
+    Machine/Equipment: If manufacturing involves specific machines or equipment, it can be represented in an entity with attributes like machine ID, name, description, maintenance schedule, and availability.
+
+
 
     Bill of Materials (BOM) Table:
         product_id: unique identifier for each product
@@ -220,19 +254,62 @@
 *** id
 *** name
 *** description
-*** store_id
 *** product_category_id
-*** sku
-*** upc (12 digit, 6 for manufacturer, 5 for item, 1 for barcode verification)
-*** manufacturing_cost
-*** selling_price
-*** quantity
-** product_categories
-*** id
-*** name
-** bom
+** product_variations
 *** id
 *** product_id
+*** name
+*** sku
+*** upc (12 digit, 6 for manufacturer, 5 for item, 1 for barcode verification)
+** product_attributes
+*** id
+*** product_variation_id
+*** name
+*** value
+** inventory
+*** id
+*** product_variation_id
+*** component_id
+*** quantity
+*** store/location
+*** for(product/component)
+** pricing
+*** id
+*** product_variation_id
+*** component_id
+*** price
+*** effective_date
+*** type(purchase/manufacturing/sell)
+*** for(product/component)
+** files
+*** id
+*** product_variation_id
+*** component_id
+*** url
+*** type(image/video)
+*** for(product/component)
+** categories
+*** id
+*** name
+*** description
+*** type(product/component)
+** components
+*** id
+*** name
+*** description
+** bom
+*** id
+*** product_variant_id
 *** component_id (referencing product table)
+*** quantity
+*** cost
+** work_orders
+*** id
+*** bom_id
+*** quantity
+*** cost
+*** start_date
+*** completion_date
+*** status (pending/in_progress/completed)
 
 * PM
