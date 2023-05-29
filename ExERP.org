@@ -220,11 +220,13 @@
 *** id
 *** name
 *** description
+*** store_id
 *** product_category_id
 *** sku
 *** upc (12 digit, 6 for manufacturer, 5 for item, 1 for barcode verification)
 *** manufacturing_cost
 *** selling_price
+*** quantity
 ** product_categories
 *** id
 *** name
